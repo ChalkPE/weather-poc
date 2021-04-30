@@ -7,7 +7,24 @@
   <title>Ishgard Clear Skies</title>
   <script type="text/javascript" src="//d3js.org/d3.v3.min.js"></script>
   <script type="text/javascript" src="//cdn.jsdelivr.net/gh/wa0x6e/cal-heatmap/cal-heatmap.min.js"></script>
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/wa0x6e/cal-heatmap/cal-heatmap.css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap" rel="stylesheet"> 
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/wa0x6e/cal-heatmap/cal-heatmap.css">
+  <style>
+    * { font-family: 'Ubuntu Mono', monospace; }
+    .graph-label { font-size: 14px !important; }
+    .subdomain-text { fill: #fff !important; }
+    .cal-heatmap-container { margin: 4px 0; }
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
 </head>
 <body>
   <div id="cal-2016"></div>
@@ -17,24 +34,33 @@
   <div id="cal-2020"></div>
   <div id="cal-2021"></div>
   <script type="text/javascript">
-    const start = new Date('2016-06-14 19:00:00')
-    const end = new Date('2021-04-30 19:00:00')
-
-    ![2016, 2017, 2018, 2019, 2020, 2021].forEach((year) =>
+    [2016, 2017, 2018, 2019, 2020, 2021].forEach((year) =>
       new CalHeatMap().init({
+        // presentation
         itemSelector: '#cal-' + year,
-        data: './data.json',
         domain: 'month',
         subDomain: 'x_day',
-        start: new Date(`${year}-01-01 00:00:00`),
         range: 12,
-        cellSize: 20,
-        tooltip: true,
+        cellSize: 18,
+        domainGutter: 18,
         label: { position: 'top' },
-        domainLabelFormat: '%Y-%m',
+        tooltip: true,
+
+        // data
+        start: new Date(`${year}-01-01 00:00:00`),
+        data: './data.json',
+        considerMissingDataAsZero: true,
+
+        // legend
+        legend: [50, 80, 120, 150],
+        legendColors: { min: '#bfd4e6', max: '#0c2a4e', empty: '#f0f6fa' },
         displayLegend: false,
-        subDomainTextFormat: (d, v) => v
-      }))
+
+        // i18n
+        itemName: 'minute',
+        subDomainTextFormat: (d, v) => v || '0',
+        domainLabelFormat: '%Y-%m'
+      }));
   </script>
 </body>
 
