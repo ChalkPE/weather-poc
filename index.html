@@ -11,10 +11,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap" rel="stylesheet"> 
   <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/wa0x6e/cal-heatmap/cal-heatmap.css">
   <style>
+    a, a:visited { color: #808080; }
     * { font-family: 'Ubuntu Mono', monospace; }
+
     .graph-label { font-size: 14px !important; }
     .subdomain-text { fill: #fff !important; }
     .cal-heatmap-container { margin: 4px 0; }
+
     body {
       margin: 0;
       padding: 0;
@@ -24,15 +27,31 @@
       justify-content: center;
       align-items: center;
     }
+    #links {
+      position: absolute;
+      bottom: 16px;
+      right: 16px;
+      text-align: right;
+      line-height: 1.5rem;
+    }
+    #dark:target { background-color: #000; }
   </style>
 </head>
-<body>
-  <div id="cal-2016"></div>
-  <div id="cal-2017"></div>
-  <div id="cal-2018"></div>
-  <div id="cal-2019"></div>
-  <div id="cal-2020"></div>
-  <div id="cal-2021"></div>
+<body id="dark">
+  <nav id="links">
+    <a href="#">light</a>
+    <a href="#dark">dark</a>
+    <br>
+    <a href="https://github.com/ChalkPE/weather-poc">View on GitHub</a>
+  </nav>
+
+  <section id="cal-2016"></section>
+  <section id="cal-2017"></section>
+  <section id="cal-2018"></section>
+  <section id="cal-2019"></section>
+  <section id="cal-2020"></section>
+  <section id="cal-2021"></section>
+
   <script type="text/javascript">
     [2016, 2017, 2018, 2019, 2020, 2021].forEach((year) =>
       new CalHeatMap().init({
