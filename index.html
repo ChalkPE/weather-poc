@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ishgard Clear Skies</title>
+  <script type="text/javascript" src="//d3js.org/d3.v3.min.js"></script>
+  <script type="text/javascript" src="//cdn.jsdelivr.net/gh/wa0x6e/cal-heatmap/cal-heatmap.min.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/wa0x6e/cal-heatmap/cal-heatmap.css" />
+</head>
+<body>
+  <div id="cal-2016"></div>
+  <div id="cal-2017"></div>
+  <div id="cal-2018"></div>
+  <div id="cal-2019"></div>
+  <div id="cal-2020"></div>
+  <div id="cal-2021"></div>
+  <script type="text/javascript">
+    const start = new Date('2016-06-14 19:00:00')
+    const end = new Date('2021-04-30 19:00:00')
+
+    ![2016, 2017, 2018, 2019, 2020, 2021].forEach((year) =>
+      new CalHeatMap().init({
+        itemSelector: '#cal-' + year,
+        data: './data.json',
+        domain: 'month',
+        subDomain: 'x_day',
+        start: new Date(`${year}-01-01 00:00:00`),
+        range: 12,
+        cellSize: 20,
+        tooltip: true,
+        label: { position: 'top' },
+        domainLabelFormat: '%Y-%m',
+        displayLegend: false,
+        subDomainTextFormat: (d, v) => v
+      }))
+  </script>
+</body>
+
+</html>
